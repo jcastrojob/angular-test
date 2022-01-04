@@ -1,0 +1,33 @@
+<div class="col">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ isNewPost? 'New post': 'Edit Post' }} </h5>
+
+      <form [formGroup]="formEditPost" (submit)="save()">
+
+        <div class="mb-3">
+          <label for="title-form" class="form-label">Title</label>
+          <input type="email" class="form-control" id="title-form" formControlName="title">
+        </div>
+
+        <div class="mb-3">
+          <label for="body-form" class="form-label">Body</label>
+          <textarea class="form-control" id="body-form" rows="3" formControlName="body"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="body-form" class="form-label">User</label>
+          <select class="form-select" id='user-id' aria-label="user-id" formControlName="userId">
+            <option value=''>Open this select menu</option>
+            <option *ngFor="let user of users" [value]="user?.id">{{ user?.name}}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <button class="btn btn-primary m-1" [disabled]="formEditPost.invalid || isLoading">Save</button>
+          <a routerLink="" class="btn btn-secondary m-1">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

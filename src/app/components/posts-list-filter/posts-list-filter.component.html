@@ -1,0 +1,23 @@
+<div class="p-4">
+  <form [formGroup]="formFilter" (submit)="changeFilter()">
+    <div class="row">
+      <div class="col">
+        <label for="body-form" class="form-label">Filter by text</label>
+        <input type="text" class="form-control" id="text-filter" aria-describedby="text-filter"
+          formControlName="textFilter">
+      </div>
+
+      <div class="col">
+        <label for="body-form" class="form-label">Filter by User</label>
+        <select class="form-select" id='user-id' aria-label="user-id" formControlName="userId">
+          <option *ngFor="let user of users" [value]="user?.id">{{ user?.name}}</option>
+        </select>
+      </div>
+
+      <div class="col mt-4">
+        <button class="btn btn-primary m-1">Filter</button>
+        <button type="button" class="btn btn-warning m-1" (click)="resetFilter()">Reset</button>
+      </div>
+    </div>
+  </form>
+</div>

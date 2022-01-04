@@ -1,0 +1,24 @@
+<h1>List</h1>
+<hr>
+<div class="row">
+  <div class="col">
+    <app-posts-list-filter></app-posts-list-filter>
+  </div>
+</div>
+<div class="row">
+  <div class="col p-3">
+    <a [routerLink]="['/posts-new']" class="btn btn-primary">New</a>
+  </div>
+</div>
+<div class="row mt-4" *ngFor="let post of posts | filterUserOrText:textFilter:userId">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.body }}</p>
+        <a [routerLink]="['/posts/', post.id]" class="card-link">Edit</a>
+        <a [routerLink]="['/detail/', post.id]" class="card-link">Detail</a>
+      </div>
+    </div>
+  </div>
+</div>
