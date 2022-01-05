@@ -24,8 +24,6 @@ export class PostsListFilterComponent implements OnInit {
   }
 
   changeFilter() {
-    console.log(this.formFilter.value.textFilter)
-    console.log(this.formFilter.value.userId)
     this.filterStatus.triggerFilterStatus.emit({ textFilter: this.formFilter.value.textFilter, userId: this.formFilter.value.userId })
   }
 

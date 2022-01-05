@@ -1,6 +1,11 @@
 import { Post } from '../models/post';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
+import { handleError } from './error.handle'
+
+const URLBASE = 'https://jsonplaceholder.typicode.com/posts'
 
 @Injectable({
   providedIn: 'root'
@@ -9,23 +14,37 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  get() {
-    const url = 'https://jsonplaceholder.typicode.com/posts'
-    return this.http.get<Post[]>(url);
+  get(): Observable<Post[]> {
+    return this.http.get<Post[]>(URLBASE)
+      .pipe(
+        retry(1),
+        catchError(handleError)
+      );
   }
 
   getById(id: string) {
-    const url = `https://jsonplaceholder.typicode.com/posts/${id}`
-    return this.http.get<Post>(url);
+    return this.http.get<Post>(`${URLBASE}/${id}`)
+      .pipe(
+        retry(1),
+        catchError(handleError)
+      );
   }
 
   update(post: Post) {
-    const url = `https://jsonplaceholder.typicode.com/posts/${post.id}`
-    return this.http.put<Post>(url, post);
+    return this.http.put<Post>(`${URLBASE}/${post.id}`, post)
+      .pipe(
+        retry(1),
+        catchError(handleError)
+      );
   }
 
   create(post: Post) {
-    const url = `https://jsonplaceholder.typicode.com/posts`
-    return this.http.post<Post>(url, post);
+    return this.http.post<Post>(URLBASE, post)
+      .pipe(
+        retry(1),
+        catchError(handleError)
+      );
   }
+
+
 }

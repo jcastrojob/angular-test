@@ -2,13 +2,13 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Post Info</h5>
-      <h5 class="card-title">{{ post.title }}</h5>
+      <h5 class="card-title">{{ post?.title }}</h5>
       <p class="card-text">
-        {{ post.body }}
+        {{ post?.body }}
       </p>
     </div>
   </div>
-  <app-post-user [user]="user"></app-post-user>
+  <app-post-user [user]="user" *ngIf="user"></app-post-user>
   <app-post-comments [comments]="comments" ></app-post-comments>
   <a [routerLink]="['']" class="btn btn-primary ">Close</a>
 </div>
